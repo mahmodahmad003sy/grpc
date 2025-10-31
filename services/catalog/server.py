@@ -41,6 +41,10 @@ class CatalogService(booksvc.BookCatalogServicer):
         items = [ParseDict(d, bookpb.Book()) for d in models.search(request.query)]
         return bookpb.SearchBooksResponse(books=items)
 
+    def Clear(self, request, context):
+        deleted = models.clear()
+        return bookpb.ClearResponse(deleted=deleted)
+
 
 def serve():
     models.init()

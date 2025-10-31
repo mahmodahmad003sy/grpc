@@ -72,3 +72,12 @@ def search(q):
             }
             for r in cur.fetchall()
         ]
+
+
+def clear():
+    with sqlite3.connect(DB) as c:
+        cur = c.execute("SELECT COUNT(1) FROM books")
+        (n,) = cur.fetchone()
+        c.execute("DELETE FROM books")
+        c.commit()
+        return n

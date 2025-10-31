@@ -22,9 +22,13 @@ message ListBooksResponse { repeated Book books = 1; }
 message SearchBooksRequest { string query = 1; }
 message SearchBooksResponse { repeated Book books = 1; }
 
+message ClearRequest {}
+message ClearResponse { int32 deleted = 1; }
+
 service BookCatalog {
   rpc AddBook(AddBookRequest) returns (AddBookResponse);
   rpc GetBook(GetBookRequest) returns (GetBookResponse);
   rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
   rpc SearchBooks(SearchBooksRequest) returns (SearchBooksResponse);
+  rpc Clear(ClearRequest) returns (ClearResponse);
 }
