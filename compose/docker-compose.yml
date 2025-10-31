@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  catalog:
+    build:
+      context: ..
+      dockerfile: services/catalog/Dockerfile
+    container_name: catalog
+    ports: ["50051:50051"]
+    environment:
+      - CATALOG_PORT=50051
+      - CATALOG_DB_PATH=/data/catalog.db
+    volumes:
+      - catalog_data:/data
+  recommender:
+    build:
+      context: ..
+      dockerfile: services/recommender/Dockerfile
+    container_name: recommender
+    depends_on: [catalog]
+    ports: ["50052:50052"]
+    environment:
+      - REC_PORT=50052
+      - CATALOG_ADDR=catalog:50051
+volumes:
+  catalog_data:

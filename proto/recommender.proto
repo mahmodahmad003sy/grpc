@@ -1,0 +1,20 @@
+syntax = "proto3";
+package rec;
+option go_package = "recpb";
+
+import "book.proto";
+
+message RecommendRequest {
+  // Either seed_title or book_id; at least one is expected
+  string seed_title = 1;
+  string book_id = 2;
+  int32 k = 3; // top-K
+}
+
+message RecommendResponse {
+  repeated book.Book items = 1;
+}
+
+service Recommender {
+  rpc Recommend(RecommendRequest) returns (RecommendResponse);
+}
