@@ -22,6 +22,21 @@ docker logs --tail 20 -f catalog
 
 ## Test from Windows (PowerShell)
 
+- Get the recommender.proto and book.proto
+
+```powershell
+curl -o book.proto https://raw.githubusercontent.com/mahmodahmad003sy/grpc/master/proto/book.proto
+curl -o recommender.proto https://raw.githubusercontent.com/mahmodahmad003sy/grpc/master/proto/recommender.proto
+
+```
+
+- Generate the files: book_pb2.py,book_pb2_grpc.py,rec_pb2.py,rec_pb2_grpc.py
+
+```powershell
+python -m grpc_tools.protoc -I . --python_out=. --grpc_python_out=. book.proto recommender.proto
+```
+
+
 - Seed default dataset (run first)
 
 ```powershell
